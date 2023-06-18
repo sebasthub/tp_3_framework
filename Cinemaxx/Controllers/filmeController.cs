@@ -48,6 +48,14 @@ namespace Cinemaxx.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nome,duracao,classificacao,descricao,categoria,idioma,legenda,novo,preco")] filme filme)
         {
+
+            int id = db.filme
+            .OrderByDescending(o => o.id)
+            .Select(o => o.id)
+            .FirstOrDefault();
+
+            filme.id = id + 1;
+
             if (ModelState.IsValid)
             {
                 db.filme.Add(filme);

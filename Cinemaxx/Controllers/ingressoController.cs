@@ -52,6 +52,14 @@ namespace Cinemaxx.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,cadeira,fileira,programacao,usuario")] ingresso ingresso)
         {
+
+            int id = db.sala
+                .OrderByDescending(o => o.id)
+                .Select(o => o.id)
+                .FirstOrDefault();
+
+            ingresso.id = id + 1;
+
             if (ModelState.IsValid)
             {
                 db.ingresso.Add(ingresso);

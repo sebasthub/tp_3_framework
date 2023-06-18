@@ -50,6 +50,14 @@ namespace Cinemaxx.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,ingresso,nome_filme,filme,sala,fileira,metodo_pagamento,valor")] pagamento pagamento)
         {
+
+            int id = db.sala
+                .OrderByDescending(o => o.id)
+                .Select(o => o.id)
+                .FirstOrDefault();
+
+            pagamento.id = id + 1;
+
             if (ModelState.IsValid)
             {
                 db.pagamento.Add(pagamento);

@@ -52,6 +52,13 @@ namespace Cinemaxx.Controllers
         {
             if (ModelState.IsValid)
             {
+                int id = db.fileira
+                .OrderByDescending(o => o.id)
+                .Select(o => o.id)
+                .FirstOrDefault();
+
+                fileira.id = id + 1;
+
                 db.fileira.Add(fileira);
                 db.SaveChanges();
                 return RedirectToAction("Index");

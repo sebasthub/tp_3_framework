@@ -50,6 +50,14 @@ namespace Cinemaxx.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                int id = db.sala
+                .OrderByDescending(o => o.id)
+                .Select(o => o.id)
+                .FirstOrDefault();
+
+                sala.id = id + 1;
+
                 db.sala.Add(sala);
                 db.SaveChanges();
                 return RedirectToAction("Index");

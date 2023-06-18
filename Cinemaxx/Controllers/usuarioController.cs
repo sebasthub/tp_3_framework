@@ -48,6 +48,13 @@ namespace Cinemaxx.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nome,email,senha,administrador")] usuario usuario)
         {
+            int id = db.sala
+                .OrderByDescending(o => o.id)
+                .Select(o => o.id)
+                .FirstOrDefault();
+
+            usuario.id = id + 1;
+
             if (ModelState.IsValid)
             {
                 db.usuario.Add(usuario);
