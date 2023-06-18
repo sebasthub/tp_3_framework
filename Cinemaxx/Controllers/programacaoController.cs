@@ -49,10 +49,36 @@ namespace Cinemaxx.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,sala,filme,horario")] programacao programacao)
+        public ActionResult Create([Bind(Include = "sala,filme,horario")] programacao programacao)
         {
+
+            var horarios = db.programacao.Where(a => a.sala == programacao.sala);
+
+            foreach (var item in horarios)
+            {
+                if (item.horario == programacao.horario)
+                {
+                    ModelState.AddModelError("Horario","o horario é igual a outro");
+                }
+            }
+
+            foreach (var item in horarios)
+            {
+                var sleep = item.horario + TimeSpan.Parse("00:30:00");
+                if (item.horario < programacao.horario && sleep > programacao.horario)
+                {
+                    ModelState.AddModelError("Horario", "o horario é menor que o tempo de descanso(deve ser maior que 30 min)");
+                }
+            }
+
+            int? id = db.programacao
+        .OrderByDescending(o => o.id)
+        .Select(o => o.id)
+        .FirstOrDefault();
+
             if (ModelState.IsValid)
             {
+                programacao.id = id + 1;
                 db.programacao.Add(programacao);
                 db.SaveChanges();
                 return RedirectToAction("Index");

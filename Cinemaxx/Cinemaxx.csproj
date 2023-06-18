@@ -132,6 +132,7 @@
     <Compile Include="Controllers\fileiraController.cs" />
     <Compile Include="Controllers\filmeController.cs" />
     <Compile Include="Controllers\ingressoController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\pagamentoController.cs" />
     <Compile Include="Controllers\programacaoController.cs" />
     <Compile Include="Controllers\salaController.cs" />
@@ -144,6 +145,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ingresso.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\pagamento.cs" />
     <Compile Include="Models\programacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +239,7 @@
     <Content Include="Views\pagamento\Details.cshtml" />
     <Content Include="Views\pagamento\Edit.cshtml" />
     <Content Include="Views\pagamento\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
