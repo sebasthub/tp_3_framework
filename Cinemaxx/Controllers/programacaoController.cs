@@ -71,7 +71,7 @@ namespace Cinemaxx.Controllers
                 }
             }
 
-            int? id = db.programacao
+            int id = db.programacao
         .OrderByDescending(o => o.id)
         .Select(o => o.id)
         .FirstOrDefault();

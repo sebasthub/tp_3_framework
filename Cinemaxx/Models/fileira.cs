@@ -20,6 +20,7 @@ namespace Cinemaxx
 
         public int? sala { get; set; }
 
+        [Display(Name = "fileira")]
         [StringLength(50)]
         public string indentificador { get; set; }
 
