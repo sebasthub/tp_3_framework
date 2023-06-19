@@ -18,6 +18,7 @@ namespace Cinemaxx
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
+        [Display(Name = "filme")]
         [StringLength(255)]
         public String nome { get; set; }
 

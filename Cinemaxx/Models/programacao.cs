@@ -16,7 +16,7 @@ namespace Cinemaxx
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int? id { get; set; }
+        public int id { get; set; }
 
         public int? sala { get; set; }
 

@@ -58,10 +58,31 @@ namespace Cinemaxx.Controllers
                 .Select(o => o.id)
                 .FirstOrDefault();
 
-            ingresso.id = id + 1;
+            
+
+            var ingressos_na_secao = db.ingresso.Where(a => a.programacao == ingresso.programacao && a.fileira == ingresso.fileira);
+
+            foreach (var item in ingressos_na_secao)
+            {
+                if (item.cadeira == ingresso.cadeira)
+                {
+                    ModelState.AddModelError("Cadeira", "a cadeira ja foi escolhida");
+                }
+            }
+
+            var fileira_ate = db.fileira.Where(a => a == ingresso.fileira1).ToList();
+
+            foreach (var item in fileira_ate)
+            {
+                if (item.cadeiras_de < ingresso.cadeira && item.cadeiras_ate > ingresso.cadeira)
+                {
+                    ModelState.AddModelError("Cadeira", "a cadeira não existe");
+                }
+            }
 
             if (ModelState.IsValid)
             {
+                ingresso.id = id + 2;
                 db.ingresso.Add(ingresso);
                 db.SaveChanges();
                 return RedirectToAction("Index");

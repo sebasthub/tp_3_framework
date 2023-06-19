@@ -15,7 +15,7 @@ namespace Cinemaxx
             pagamento = new HashSet<pagamento>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         public int? cadeira { get; set; }
